@@ -1,10 +1,153 @@
-Mniam Mniam
-Cicha 11, Bełchatów (Grocholice)
-Menu
-Burger Wołowina - 18 zł Dodaj
-Burger Kurczak - 17 zł Dodaj
-Kebab Wołowina - 18 zł Dodaj
-Hot Dog - 8 zł Dodaj
-Koszyk
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mniam Mniam</title>
 
+<style>
+body{
+    font-family:Arial,sans-serif;
+    margin:0;
+    background:#222;
+    color:white;
+}
+header{
+    background:#111;
+    padding:20px;
+    text-align:center;
+}
+section{
+    padding:20px;
+}
+.card{
+    background:#333;
+    margin:10px 0;
+    padding:15px;
+    border-radius:10px;
+}
+button{
+    background:#ff9800;
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+}
+input{
+    width:100%;
+    padding:10px;
+    margin:5px 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Mniam Mniam</h1>
+<p>Cicha 11, Bełchatów (Grocholice)</p>
+<p>Tel: 790879968</p>
+</header>
+
+<section>
+<h2>Menu</h2>
+
+<div class="card">
+Burger Wołowina - 18 zł
+<button onclick="add('Burger Wołowina 18 zł')">Dodaj</button>
+</div>
+
+<div class="card">
+Burger Kurczak - 17 zł
+<button onclick="add('Burger Kurczak 17 zł')">Dodaj</button>
+</div>
+
+<div class="card">
+Smash Burger - 24 zł
+<button onclick="add('Smash Burger 24 zł')">Dodaj</button>
+</div>
+
+<div class="card">
+Kebab Wołowina - 18 zł
+<button onclick="add('Kebab Wołowina 18 zł')">Dodaj</button>
+</div>
+
+<div class="card">
+Kebab Kurczak - 17 zł
+<button onclick="add('Kebab Kurczak 17 zł')">Dodaj</button>
+</div>
+
+<div class="card">
+Hot Dog - 8 zł
+<button onclick="add('Hot Dog 8 zł')">Dodaj</button>
+</div>
+
+<div class="card">
+Zapiekanka Tradycyjna - 14 zł
+<button onclick="add('Zapiekanka Tradycyjna 14 zł')">Dodaj</button>
+</div>
+
+<h2>Koszyk</h2>
+<div id="cart"></div>
+
+<h2>Zamówienie</h2>
+
+<input id="name" placeholder="Imię i nazwisko">
+
+<button onclick="sendSMS()">
 Wyślij zamówienie SMS
+</button>
+
+<br><br>
+
+<a href="tel:790879968">
+<button>Zadzwoń</button>
+</a>
+
+<a href="https://maps.google.com/?q=Cicha+11+Belchatow">
+<button>Mapa</button>
+</a>
+
+<h2>Godziny otwarcia</h2>
+
+<p>Poniedziałek 10:00-19:00</p>
+<p>Wtorek 9:00-19:00</p>
+<p>Środa 10:00-19:00</p>
+<p>Czwartek 9:00-19:00</p>
+<p>Piątek 10:00-19:00</p>
+<p>Sobota 9:00-19:00</p>
+<p>Niedziela 11:30-18:00</p>
+
+</section>
+
+<script>
+
+let cart=[];
+
+function add(item){
+    cart.push(item);
+    renderCart();
+}
+
+function renderCart(){
+    document.getElementById("cart").innerHTML=
+    cart.map(x=>"<p>"+x+"</p>").join("");
+}
+
+function sendSMS(){
+
+    let name=document.getElementById("name").value;
+
+    let text=
+    "Zamówienie Mniam Mniam%0A"+
+    "Klient: "+name+"%0A"+
+    cart.join("%0A");
+
+    window.location.href=
+    "sms:790879968?body="+text;
+}
+
+</script>
+
+</body>
+</html>
